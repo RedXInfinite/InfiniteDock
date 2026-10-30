@@ -33,11 +33,10 @@ abstract class AppDatabase : RoomDatabase() {
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        // Pre-populate database
                         CoroutineScope(Dispatchers.IO).launch {
                             val database = getDatabase(context)
                             database.appPreferencesDao().savePreferences(AppPreferencesEntity())
-                            seedDefaultShortcuts(database.shortcutDao())
+                            seedDefaultWindowsShortcuts(database.shortcutDao())
                         }
                     }
                 })
@@ -47,42 +46,58 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        private suspend fun seedDefaultShortcuts(shortcutDao: ShortcutDao) {
-            val defaultShortcuts = listOf(
+        private suspend fun seedDefaultWindowsShortcuts(shortcutDao: ShortcutDao) {
+            val windowsShortcuts = listOf(
                 ShortcutEntity(
-                    packageName = "com.android.settings",
-                    displayName = "Settings",
+                    packageName = "com.google.chrome.win",
+                    displayName = "Google Chrome",
                     position = 0,
-                    shortcutType = "SYSTEM",
+                    shortcutType = "WIN_APP",
                     isDockShortcut = true,
                     isDesktopShortcut = true
                 ),
                 ShortcutEntity(
-                    packageName = "com.android.chrome",
-                    displayName = "Browser",
+                    packageName = "com.discord.win",
+                    displayName = "Discord",
                     position = 1,
-                    shortcutType = "APP",
+                    shortcutType = "WIN_APP",
                     isDockShortcut = true,
                     isDesktopShortcut = true
                 ),
                 ShortcutEntity(
-                    packageName = "com.google.android.youtube",
-                    displayName = "Media",
+                    packageName = "com.spotify.win",
+                    displayName = "Spotify",
                     position = 2,
-                    shortcutType = "APP",
+                    shortcutType = "WIN_APP",
                     isDockShortcut = true,
                     isDesktopShortcut = true
                 ),
                 ShortcutEntity(
-                    packageName = "com.infinitedock.app",
-                    displayName = "InfiniteDock",
+                    packageName = "com.valvesoftware.steam.win",
+                    displayName = "Steam PC",
                     position = 3,
-                    shortcutType = "APP",
+                    shortcutType = "WIN_APP",
+                    isDockShortcut = true,
+                    isDesktopShortcut = true
+                ),
+                ShortcutEntity(
+                    packageName = "com.microsoft.vscode.win",
+                    displayName = "VS Code",
+                    position = 4,
+                    shortcutType = "WIN_APP",
+                    isDockShortcut = true,
+                    isDesktopShortcut = true
+                ),
+                ShortcutEntity(
+                    packageName = "com.adobe.photoshop.win",
+                    displayName = "Photoshop",
+                    position = 5,
+                    shortcutType = "WIN_APP",
                     isDockShortcut = true,
                     isDesktopShortcut = true
                 )
             )
-            shortcutDao.insertShortcuts(defaultShortcuts)
+            shortcutDao.insertShortcuts(windowsShortcuts)
         }
     }
 }

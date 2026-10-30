@@ -109,6 +109,21 @@ object ThemeRegistry {
         gridLineColor = Color(0x2237474F)
     )
 
+    val LiquidGlass = ThemeSpec(
+        id = "liquid_glass",
+        name = "LIQUID GLASS",
+        subtitle = "Acrylic Refraction Surface",
+        primaryColor = Color(0xFF00E5FF),
+        secondaryColor = Color(0xFF7C4DFF),
+        accentColor = Color(0xFF64FFDA),
+        backgroundColor = Color(0xFF0B101D),
+        surfaceColor = Color(0x2B1E2942),
+        cardBackgroundColor = Color(0x3A263554),
+        textColor = Color(0xFFFFFFFF),
+        secondaryTextColor = Color(0xFF80D8FF),
+        gridLineColor = Color(0x4400E5FF)
+    )
+
     val allThemes: List<ThemeSpec> = listOf(
         CrimsonCore,
         Voltstrike,
@@ -116,7 +131,8 @@ object ThemeRegistry {
         TidalSurge,
         VerdantBloom,
         ShadowProtocol,
-        AuroraDawn
+        AuroraDawn,
+        LiquidGlass
     )
 
     fun getThemeById(id: String): ThemeSpec {

@@ -84,7 +84,6 @@ fun AnimatedThemeBackground(
         // Signature Theme Animations
         when (themeSpec.id) {
             "voltstrike" -> {
-                // VOLTSTRIKE: Lightning sparks & electric circuit pulses
                 val sparkCount = when (intensity) {
                     AnimationIntensity.LOW -> 3
                     AnimationIntensity.MEDIUM -> 6
@@ -101,7 +100,6 @@ fun AnimatedThemeBackground(
                     )
                 }
 
-                // Electric bolt across screen
                 val boltPath = Path().apply {
                     var bx = 0f
                     var by = h * 0.3f
@@ -120,7 +118,6 @@ fun AnimatedThemeBackground(
             }
 
             "shadow_protocol" -> {
-                // SHADOW PROTOCOL: Digital scanline & purple matrix glow
                 val scanlineY = progress * h
                 drawLine(
                     color = themeSpec.primaryColor.copy(alpha = 0.6f),
@@ -129,7 +126,6 @@ fun AnimatedThemeBackground(
                     strokeWidth = 3f
                 )
 
-                // Cyber grid pulse block
                 val blockX = (progress * w * 1.5f) % w
                 val blockY = (progress * h * 0.8f) % h
                 drawRect(
@@ -139,8 +135,23 @@ fun AnimatedThemeBackground(
                 )
             }
 
+            "liquid_glass" -> {
+                // Liquid Glass acrylic shimmer & refraction light sheen
+                val shimmerX = (progress * w * 2f) - w
+                val glassPath = Path().apply {
+                    moveTo(shimmerX, 0f)
+                    lineTo(shimmerX + 160f, 0f)
+                    lineTo(shimmerX + 60f, h)
+                    lineTo(shimmerX - 100f, h)
+                    close()
+                }
+                drawPath(
+                    path = glassPath,
+                    color = themeSpec.accentColor.copy(alpha = 0.12f * (intensity.ordinal / 3f))
+                )
+            }
+
             "crimson_core" -> {
-                // CRIMSON CORE: Retro handheld scanning bar & pixel grid highlight
                 val scanBarY = (sin(progress * 3.14f) * h)
                 drawLine(
                     color = themeSpec.primaryColor.copy(alpha = 0.3f),
@@ -151,7 +162,6 @@ fun AnimatedThemeBackground(
             }
 
             "inferno_pulse" -> {
-                // INFERNO PULSE: Ember floating particles
                 val particleCount = (5 * intensity.ordinal)
                 for (i in 0 until particleCount) {
                     val pY = (h - ((progress * h + i * 80) % h))
@@ -165,7 +175,6 @@ fun AnimatedThemeBackground(
             }
 
             "tidal_surge" -> {
-                // TIDAL SURGE: Ocean fluid sine wave
                 val wavePath = Path().apply {
                     moveTo(0f, h * 0.8f)
                     var wx = 0f
@@ -185,7 +194,6 @@ fun AnimatedThemeBackground(
             }
 
             "verdant_bloom" -> {
-                // VERDANT BLOOM: Organic floating spores
                 val sporeCount = 4 * intensity.ordinal
                 for (i in 0 until sporeCount) {
                     val sx = (i * 90f + progress * 50f) % w
@@ -199,7 +207,6 @@ fun AnimatedThemeBackground(
             }
 
             "aurora_dawn" -> {
-                // AURORA DAWN: Soft ambient gradient beam
                 val auroraX = (sin(progress * 6.28f) * w * 0.3f) + w / 2
                 drawCircle(
                     color = themeSpec.accentColor.copy(alpha = 0.12f),

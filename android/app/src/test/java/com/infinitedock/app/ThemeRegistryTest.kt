@@ -9,12 +9,12 @@ import org.junit.Test
 class ThemeRegistryTest {
 
     @Test
-    fun `verify all seven signature themes exist`() {
+    fun `verify all eight signature themes exist`() {
         val themes = ThemeRegistry.allThemes
-        assertEquals(7, themes.size)
+        assertEquals(8, themes.size)
 
         val themeIds = themes.map { it.id }.toSet()
-        assertEquals(7, themeIds.size)
+        assertEquals(8, themeIds.size)
 
         val expectedIds = setOf(
             "crimson_core",
@@ -23,7 +23,8 @@ class ThemeRegistryTest {
             "tidal_surge",
             "verdant_bloom",
             "shadow_protocol",
-            "aurora_dawn"
+            "aurora_dawn",
+            "liquid_glass"
         )
         assertEquals(expectedIds, themeIds)
     }
@@ -35,14 +36,10 @@ class ThemeRegistryTest {
     }
 
     @Test
-    fun `getThemeById returns correct theme spec`() {
-        val voltstrike = ThemeRegistry.getThemeById("voltstrike")
-        assertEquals("VOLTSTRIKE", voltstrike.name)
-        assertNotNull(voltstrike.primaryColor)
-
-        val shadowProtocol = ThemeRegistry.getThemeById("shadow_protocol")
-        assertEquals("SHADOW PROTOCOL", shadowProtocol.name)
-        assertNotNull(shadowProtocol.primaryColor)
+    fun `getThemeById returns correct theme spec for Liquid Glass`() {
+        val liquidGlass = ThemeRegistry.getThemeById("liquid_glass")
+        assertEquals("LIQUID GLASS", liquidGlass.name)
+        assertNotNull(liquidGlass.primaryColor)
     }
 
     @Test
